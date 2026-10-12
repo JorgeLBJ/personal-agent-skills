@@ -13,7 +13,7 @@ Load when the user asks for a visual report of frontend changes made in the curr
 
 ## Hard Rules
 
-- Requires Playwright MCP tools (`browser_navigate`, `browser_snapshot`, `browser_take_screenshot`). If unavailable, STOP and say so; never fake screenshots.
+- Requires Playwright MCP tools (`browser_navigate`, `browser_snapshot`, `browser_take_screenshot`; names may carry a runtime prefix such as `playwright_` or `mcp__playwright__`). If unavailable, STOP and say so; never fake screenshots.
 - Document only changes that exist: derive them from session history, `git status`, `git diff`, and the files.
 - Output is a LOCAL file. Never publish it as an Artifact or upload it anywhere.
 - Write report text in the user's conversation language; keep paths, routes, and identifiers verbatim.

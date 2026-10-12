@@ -24,7 +24,7 @@ Load when the user asks for a guided tour of changes made in the current session
 
 | Situation | Action |
 |-----------|--------|
-| Playwright MCP tools available (`browser_navigate`, `browser_take_screenshot`) and dev server reachable | Navigate to the route, take a screenshot, highlight the changed element (snapshot/hover) |
+| Playwright MCP tools available (`browser_navigate`, `browser_take_screenshot`, any runtime prefix) and dev server reachable | Navigate to the route, take a screenshot, highlight the changed element (snapshot/hover) |
 | Playwright available but server not running | Give the exact run command and URL; ask the user to start it or confirm you may start it |
 | No Playwright | Give the full URL/route and the exact UI steps (click X → open Y) to see the change |
 | Change has no visual surface (hook, service, API) | Group it into the stop of the UI that consumes it; list files with `path:line` |
