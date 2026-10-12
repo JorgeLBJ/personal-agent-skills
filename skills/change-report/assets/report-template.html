@@ -1,0 +1,111 @@
+<!--
+FILL RULES (delete this comment in the final file):
+- Replace every {{placeholder}}. Repeat <section class="change"> once per change, numbered 01, 02...
+- Repeat <a class="toc-item"> per change; href="#change-NN".
+- Repeat <figure> per screenshot; src is relative: screenshots/NN-name.png.
+- Tag class: new | mod | del. Tag text: "New" | "Modified" | "Removed", translated to the user's language.
+- Remove <ul class="files"> if the change lists no files; remove <div class="shots"> if it has no images.
+-->
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{feature name}} · Change Report</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --text: #1a1d23; --muted: #5d6573;
+    --border: #e3e6eb; --accent: #4f46e5; --accent-soft: #eef0ff;
+    --new: #0f8a4f; --mod: #b26b00; --del: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115; --surface: #171a21; --text: #e7e9ee; --muted: #9aa3b2;
+      --border: #2a2f3a; --accent: #8b85ff; --accent-soft: #1f2140;
+      --new: #3ecf8e; --mod: #f0b44c; --del: #ff6b6b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 16px 80px; }
+  header.hero { background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 13px;
+    letter-spacing: .08em; text-transform: uppercase; }
+  h1 { margin: 6px 0 8px; font-size: 28px; line-height: 1.2; }
+  .meta { color: var(--muted); display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; }
+  .summary { margin-top: 14px; }
+  nav.toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px; margin-bottom: 32px; }
+  .toc-item { display: block; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 14px; text-decoration: none; color: var(--text); }
+  .toc-item:hover { border-color: var(--accent); }
+  .toc-item b { color: var(--accent); margin-right: 6px; }
+  section.change { background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin-bottom: 24px; scroll-margin-top: 16px; }
+  .change-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .num { font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft);
+    border-radius: 999px; padding: 2px 10px; }
+  h2 { margin: 0; font-size: 21px; }
+  .tag { font-size: 12px; font-weight: 600; border-radius: 6px; padding: 2px 8px; border: 1px solid currentColor; }
+  .tag.new { color: var(--new); } .tag.mod { color: var(--mod); } .tag.del { color: var(--del); }
+  .route { font-family: ui-monospace, Consolas, monospace; font-size: 13px; color: var(--muted); margin: 6px 0 12px; }
+  ul.files { font-family: ui-monospace, Consolas, monospace; font-size: 13px; color: var(--muted); padding-left: 18px; }
+  .shots { display: grid; gap: 16px; margin-top: 16px; }
+  figure { margin: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg); }
+  figure img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  figcaption { padding: 10px 14px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); }
+  dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+  dialog::backdrop { background: rgba(0,0,0,.8); }
+  dialog img { max-width: 96vw; max-height: 96vh; display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Change Report</div>
+    <h1>{{feature name}}</h1>
+    <div class="meta">
+      <span>📅 {{date}}</span>
+      <span>🧩 {{changes count}} changes</span>
+      <span>🖼️ {{screenshots count}} screenshots</span>
+      <span>🌐 {{base url}}</span>
+    </div>
+    <p class="summary">{{one-paragraph summary of the change}}</p>
+  </header>
+
+  <nav class="toc">
+    <a class="toc-item" href="#change-01"><b>01</b>{{change title}}</a>
+  </nav>
+
+  <section class="change" id="change-01">
+    <div class="change-head">
+      <span class="num">01</span>
+      <h2>{{change title}}</h2>
+      <span class="tag new">{{New|Modified|Removed}}</span>
+    </div>
+    <div class="route">{{route or screen}}</div>
+    <p>{{description: what changed, why it matters, how to interact with it}}</p>
+    <ul class="files">
+      <li>{{path/to/file.tsx:42}} — {{what changed there}}</li>
+    </ul>
+    <div class="shots">
+      <figure>
+        <img src="screenshots/01-{{screen}}-{{state}}.png" alt="{{caption}}" loading="lazy">
+        <figcaption>{{caption}}</figcaption>
+      </figure>
+    </div>
+  </section>
+</div>
+
+<dialog id="zoom"><img alt=""></dialog>
+<script>
+  const dlg = document.getElementById('zoom');
+  document.querySelectorAll('figure img').forEach(img => img.addEventListener('click', () => {
+    dlg.querySelector('img').src = img.src; dlg.showModal();
+  }));
+  dlg.addEventListener('click', () => dlg.close());
+</script>
+</body>
+</html>
